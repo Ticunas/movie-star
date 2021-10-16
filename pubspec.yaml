@@ -34,11 +34,45 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  #local Storage
+  hive: ^2.0.4
+  hive_flutter: ^1.0.0
+  # Functional programming thingies
+  dartz: ^0.10.0-nullsafety.0
+  #Static Analysis
+  meta: ^1.2.4
+  #Mobx
+  mobx: ^2.0.1
+  flutter_mobx: ^2.0.0
+  # Value equality
+  equatable: ^2.0.0
+  #Verifica Conexão com a internet
+  data_connection_checker: ^0.3.4
+  #REST
+  dio: ^4.0.0
+  #Cache
+  dio_http_cache: ^0.3.0
+  #DI
+  get_it: ^7.2.0
+  #json Serializable
+  json_annotation: ^4.0.0 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  #Test
+  mockito: ^5.0.4
+  #Mobx
+  build_runner: ^2.1.4
+  mobx_codegen: ^2.0.1+2
+  #Quality
+  lints: ^1.0.1
+  #Rotas
+  auto_route_generator: ^2.1.0
+  #json Serializable
+  json_serializable: ^4.0.0
+  #Hive generator
+  hive_generator: ^1.0.1
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
