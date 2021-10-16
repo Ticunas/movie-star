@@ -39,8 +39,6 @@ dependencies:
   hive_flutter: ^1.0.0
   # Functional programming thingies
   dartz: ^0.10.0-nullsafety.0
-  #Static Analysis
-  meta: ^1.2.4
   #Mobx
   mobx: ^2.0.1
   flutter_mobx: ^2.0.0
