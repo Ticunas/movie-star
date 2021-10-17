@@ -7,7 +7,15 @@
 - `$flutter pub run build_runner watch --delete-conflicting-outputs`
 
 ---
-For this app was used
+### To Develop this app was used
 - Hive for database
 - Gravatar api for user picture (gravatar.com)
 - The Movie DP api to consulting movie informations (https://www.themoviedb.org/)
+
+
+---
+
+### All commits follow Conventional Commits
+For more information about (https://www.conventionalcommits.org/)
+- All commits is easy to understand and is possible check commits references to issues
+- Is possible prepare ci/cd and bump version automatically using @semantic-release npm plugins
