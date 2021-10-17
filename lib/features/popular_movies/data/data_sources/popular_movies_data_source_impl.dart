@@ -18,7 +18,7 @@ class PopularMoviesDataSourceImpl
   Future<PopularMoviesResponseModel> getPopularMoviesInfo(
       NoParams params, bool forceRefresh) async {
     try {
-      final response = await dio.get(paths.moviedb_popular_movies,
+      final response = await dio.get(paths.movieDbPopularMovies,
           options: customRequestOptions(forceRefresh, cacheTime, maxStaleTime));
       return PopularMoviesResponseModel.fromJson(response.data);
     } on DioError catch (e) {
