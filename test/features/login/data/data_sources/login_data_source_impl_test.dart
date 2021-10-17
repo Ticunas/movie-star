@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
-import 'package:movie_star/core/errors/expections.dart';
+import 'package:movie_star/core/errors/exceptions.dart';
 import 'package:movie_star/core/use_cases/use_case.dart';
 import 'package:movie_star/features/login/data/data_sources/contract/login_data_source.dart';
 import 'package:movie_star/features/login/data/data_sources/login_data_source_impl.dart';

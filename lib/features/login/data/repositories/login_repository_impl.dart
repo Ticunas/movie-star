@@ -1,4 +1,4 @@
-import 'package:movie_star/core/errors/expections.dart';
+import 'package:movie_star/core/errors/exceptions.dart';
 import 'package:movie_star/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:movie_star/core/errors/failures/hive_failures.dart';
