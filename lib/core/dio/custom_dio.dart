@@ -7,7 +7,7 @@ class CustomDio {
   CustomDio({required this.apiKey});
 
   getDio() {
-    var dio = _dioFactory(constants.base_mobiedb_url);
+    var dio = _dioFactory(constants.baseMovieDbUrl);
     dio.options.contentType = Headers.jsonContentType;
     dio.options.headers['Authorization'] = 'bearer $apiKey';
   }

@@ -18,19 +18,12 @@ void main() {
   late PopularMoviesDataSource dataSource;
   late NoParams tNoParams;
   late bool tForceRefresh;
-  late PopularMoviesResponseModel tResponse;
-
-  PopularMoviesResponseModel getPopularMovieResponseFromFixture() {
-    return PopularMoviesResponseModel.fromJson(jsonDecode(
-        fixture('features/popular_movies/fixtures/popular_movies_200.json')));
-  }
 
   setUp(() {
     mockDio = MockDio();
     dataSource = PopularMoviesDataSourceImpl(dio: mockDio);
     tNoParams = NoParams();
     tForceRefresh = false;
-    tResponse = getPopularMovieResponseFromFixture();
   });
 
   Response getResponse200() {

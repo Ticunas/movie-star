@@ -1,1 +1,1 @@
-const String moviedb_popular_movies = '/movie/popular';
+const String movieDbPopularMovies = '/movie/popular';
