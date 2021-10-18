@@ -2,13 +2,13 @@ import 'package:hive/hive.dart';
 import 'package:movie_star/features/popular_movies/data/data_sources/contract/movies_favorited_local_data_source.dart';
 import 'package:movie_star/features/popular_movies/data/models/movie_info_model.dart';
 
-class MovieFavoritedLocalDataSourceImpl
+class MoviesFavoritedLocalDataSourceImpl
     implements MoviesFavoritedLocalDataSource {
   final String movieFavoritedBoxName = 'movie_favorited_box';
 
   final HiveInterface hive;
 
-  MovieFavoritedLocalDataSourceImpl({required this.hive}) {
+  MoviesFavoritedLocalDataSourceImpl({required this.hive}) {
     hive.registerAdapter(MovieInfoModelAdapter());
   }
   @override

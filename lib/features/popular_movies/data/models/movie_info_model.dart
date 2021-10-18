@@ -30,7 +30,7 @@ class MovieInfoModel extends MovieInfo {
   @override
   @JsonKey(defaultValue: false)
   @HiveField(5)
-  final bool favorited;
+  bool favorited;
 
   MovieInfoModel(
     this.id,
@@ -45,4 +45,9 @@ class MovieInfoModel extends MovieInfo {
       _$MovieInfoModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieInfoModelToJson(this);
+
+  factory MovieInfoModel.fromEntity(MovieInfo movie) {
+    return MovieInfoModel(movie.id, movie.title, movie.releaseDate,
+        movie.voteAvarage, movie.posterPath, movie.favorited);
+  }
 }

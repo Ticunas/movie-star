@@ -1,5 +1,5 @@
-import 'package:movie_star/core/use_cases/use_case.dart';
 import 'package:movie_star/features/popular_movies/data/models/popular_movies_response_model.dart';
+import 'package:movie_star/features/popular_movies/domain/use_cases/get_popular_movies_info_use_case.dart';
 
 abstract class PopularMoviesDataSource {
   ///Return [PopularMovieResponse]
@@ -14,5 +14,5 @@ abstract class PopularMoviesDataSource {
   ///
   ///Throw [UnkowException] when some unknow error occours
   Future<PopularMoviesResponseModel> getPopularMoviesInfo(
-      NoParams params, bool forceRefresh);
+      Params params, bool forceRefresh);
 }
