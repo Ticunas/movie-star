@@ -4,10 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:movie_star/core/use_cases/use_case.dart';
 import 'package:movie_star/features/popular_movies/data/data_sources/contract/popular_movies_data_source.dart';
 import 'package:movie_star/features/popular_movies/data/data_sources/popular_movies_data_source_impl.dart';
 import 'package:movie_star/features/popular_movies/data/models/popular_movies_response_model.dart';
+import 'package:movie_star/features/popular_movies/domain/use_cases/get_popular_movies_info_use_case.dart';
 
 import '../../../../fixture_reader.dart';
 import 'popular_movies_data_source_impl_test.mocks.dart';
@@ -16,13 +16,13 @@ import 'popular_movies_data_source_impl_test.mocks.dart';
 void main() {
   late MockDio mockDio;
   late PopularMoviesDataSource dataSource;
-  late NoParams tNoParams;
+  late Params tParams;
   late bool tForceRefresh;
 
   setUp(() {
     mockDio = MockDio();
     dataSource = PopularMoviesDataSourceImpl(dio: mockDio);
-    tNoParams = NoParams();
+    tParams = Params(0);
     tForceRefresh = false;
   });
 
@@ -43,7 +43,7 @@ void main() {
             .thenAnswer((_) async => getResponse200());
         //act
         final result =
-            await dataSource.getPopularMoviesInfo(tNoParams, tForceRefresh);
+            await dataSource.getPopularMoviesInfo(tParams, tForceRefresh);
         //assert
         expect(result, isA<PopularMoviesResponseModel>());
       },

@@ -6,20 +6,22 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie_star/core/errors/exceptions.dart';
 import 'package:movie_star/core/errors/failures/core_failures.dart';
-import 'package:movie_star/core/use_cases/use_case.dart';
+import 'package:movie_star/features/popular_movies/data/data_sources/contract/movies_favorited_local_data_source.dart';
 import 'package:movie_star/features/popular_movies/data/data_sources/contract/popular_movies_data_source.dart';
 import 'package:movie_star/features/popular_movies/data/models/popular_movies_response_model.dart';
 import 'package:movie_star/features/popular_movies/data/repositories/popular_movies_repository_impl.dart';
 import 'package:movie_star/features/popular_movies/domain/repositories/popular_movies_repository.dart';
+import 'package:movie_star/features/popular_movies/domain/use_cases/get_popular_movies_info_use_case.dart';
 
 import '../../../../fixture_reader.dart';
 import 'popular_movies_repository_impl_test.mocks.dart';
 
-@GenerateMocks([PopularMoviesDataSource])
+@GenerateMocks([PopularMoviesDataSource, MoviesFavoritedLocalDataSource])
 void main() {
   late MockPopularMoviesDataSource mockPopularMoviesDataSource;
+  late MockMoviesFavoritedLocalDataSource mockMoviesFavoritedLocalDataSource;
   late PopularMoviesRepository repository;
-  late NoParams tNoparams;
+  late Params tParams;
   late bool tForceRefresh;
   late PopularMoviesResponseModel tResponse;
 
@@ -30,11 +32,13 @@ void main() {
 
   setUp(() {
     mockPopularMoviesDataSource = MockPopularMoviesDataSource();
-    repository =
-        PopularMoviesRepositoryImpl(dataSource: mockPopularMoviesDataSource);
+    mockMoviesFavoritedLocalDataSource = MockMoviesFavoritedLocalDataSource();
+    repository = PopularMoviesRepositoryImpl(
+        dataSource: mockPopularMoviesDataSource,
+        localDataSource: mockMoviesFavoritedLocalDataSource);
     tForceRefresh = false;
     tResponse = getPopularMovieResponseFromFixture();
-    tNoparams = NoParams();
+    tParams = Params(0);
   });
   group('Success', () {
     test(
@@ -42,11 +46,11 @@ void main() {
       () async {
         //arange
         when(mockPopularMoviesDataSource.getPopularMoviesInfo(
-                tNoparams, tForceRefresh))
+                tParams, tForceRefresh))
             .thenAnswer((_) async => tResponse);
         //act
         final result =
-            await repository.getPopularMovies(tNoparams, tForceRefresh);
+            await repository.getPopularMovies(tParams, tForceRefresh);
         //assert
         expect(result, Right(tResponse));
       },
@@ -58,11 +62,11 @@ void main() {
       () async {
         //arange
         when(mockPopularMoviesDataSource.getPopularMoviesInfo(
-                tNoparams, tForceRefresh))
+                tParams, tForceRefresh))
             .thenThrow(ConnectTimeOutException());
         //act
         final response =
-            await repository.getPopularMovies(tNoparams, tForceRefresh);
+            await repository.getPopularMovies(tParams, tForceRefresh);
         //assert
         expect(response, Left(ConnectTimeoutFailure()));
       },
@@ -73,11 +77,11 @@ void main() {
       () async {
         //arange
         when(mockPopularMoviesDataSource.getPopularMoviesInfo(
-                tNoparams, tForceRefresh))
+                tParams, tForceRefresh))
             .thenThrow(ResponseTimeOutException());
         //act
         final response =
-            await repository.getPopularMovies(tNoparams, tForceRefresh);
+            await repository.getPopularMovies(tParams, tForceRefresh);
         //assert
         expect(response, Left(ResponseTimeOutFailure()));
       },
@@ -88,11 +92,11 @@ void main() {
       () async {
         //arange
         when(mockPopularMoviesDataSource.getPopularMoviesInfo(
-                tNoparams, tForceRefresh))
+                tParams, tForceRefresh))
             .thenThrow(UnauthorizedException());
         //act
         final response =
-            await repository.getPopularMovies(tNoparams, tForceRefresh);
+            await repository.getPopularMovies(tParams, tForceRefresh);
         //assert
         expect(response, Left(UnauthorizedFailure()));
       },
@@ -103,11 +107,11 @@ void main() {
       () async {
         //arange
         when(mockPopularMoviesDataSource.getPopularMoviesInfo(
-                tNoparams, tForceRefresh))
+                tParams, tForceRefresh))
             .thenThrow(NotFoundException());
         //act
         final response =
-            await repository.getPopularMovies(tNoparams, tForceRefresh);
+            await repository.getPopularMovies(tParams, tForceRefresh);
         //assert
         expect(response, Left(NotFoundFailure()));
       },
