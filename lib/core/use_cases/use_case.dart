@@ -11,3 +11,5 @@ abstract class UseCaseSingleRequest<Type, Params> {
 
 ///Used for all UseCase that no need Params
 class NoParams {}
+
+class NoReturn {}
