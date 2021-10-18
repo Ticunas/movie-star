@@ -1,6 +1,9 @@
 class Credential {
   final String name;
-  final String email;
+  late String email;
 
-  Credential(this.name, this.email);
+  Credential(this.name, String email) {
+    email = email.replaceAll(' ', '');
+    this.email = email.toLowerCase();
+  }
 }

@@ -17,7 +17,7 @@ abstract class _SaveCredentialStore with Store {
   final SaveCredentialUseCase _useCase;
 
   @observable
-  late ObservableFuture<Either<Failure, Credential>> _resultFuture;
+  ObservableFuture<Either<Failure, Credential>>? _resultFuture;
 
   @observable
   Credential? credential;
@@ -32,16 +32,16 @@ abstract class _SaveCredentialStore with Store {
     if (credential == null) {
       return StoreState.initial;
     }
-    if (_resultFuture.status == FutureStatus.rejected) {
+    if (_resultFuture?.status == FutureStatus.rejected) {
       return StoreState.erro;
     }
-    if (_resultFuture.status == FutureStatus.pending) {
+    if (_resultFuture?.status == FutureStatus.pending) {
       if (credential != null) {
         return StoreState.loadingMore;
       }
       return StoreState.loading;
     }
-    if (_resultFuture.status == FutureStatus.fulfilled) {
+    if (_resultFuture?.status == FutureStatus.fulfilled) {
       if (credential == null) {
         return StoreState.erro;
       }
@@ -57,6 +57,6 @@ abstract class _SaveCredentialStore with Store {
 
     final result = await _resultFuture;
 
-    result.fold((l) => failure = l, (r) => credential = r);
+    result?.fold((l) => failure = l, (r) => credential = r);
   }
 }
