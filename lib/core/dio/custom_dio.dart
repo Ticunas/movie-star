@@ -10,6 +10,7 @@ class CustomDio {
     var dio = _dioFactory(constants.baseMovieDbUrl);
     dio.options.contentType = Headers.jsonContentType;
     dio.options.headers['Authorization'] = 'bearer $apiKey';
+    return dio;
   }
 
   Dio _dioFactory(String baseUrl) {
