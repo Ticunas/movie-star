@@ -2,6 +2,7 @@
 ## Flutter app for save movies to watch later
 
 ### To Run this app please follow below commands:
+- Insert you moviesDB key into /core/dio/api_key.dart
 - `$flutter clean`
 - `$flutter pub get`
 - `$flutter pub run build_runner watch --delete-conflicting-outputs`
