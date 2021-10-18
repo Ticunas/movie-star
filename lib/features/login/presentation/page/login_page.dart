@@ -1,9 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:movie_star/core/di/injection.dart';
 import 'package:movie_star/core/errors/failures.dart';
 import 'package:movie_star/core/presentation/widgets/snack_bar_factory.dart';
+import 'package:movie_star/core/session/credential_guard.dart';
 import 'package:movie_star/features/login/presentation/login_controller.dart';
 import 'package:movie_star/features/login/presentation/stores/save_credential_store.dart';
+import 'package:movie_star/routes/app_router.gr.dart';
 
 class LoginPage extends StatefulWidget {
   final SaveCredentialStore saveCredentialStore;
@@ -25,8 +29,10 @@ class _LoginPageState extends State<LoginPage> {
   final _nameTextController = TextEditingController();
   final _emailTextController = TextEditingController();
   List<ReactionDisposer>? _disposers;
+  late StackRouter _router;
   @override
   Widget build(BuildContext context) {
+    _router = AutoRouter.of(context);
     _scaffoldMessenger = ScaffoldMessenger.of(context);
     return Scaffold(
       key: _scaffoldKey,
@@ -121,7 +127,8 @@ class _LoginPageState extends State<LoginPage> {
       when(
           (_) => widget.saveCredentialStore.credential != null,
           () => {
-                //TODO call HomePage
+                _router.navigate(PopularMoviesRoute(
+                    credential: sl<CredentialGuard>().getCredential!))
               }),
 
       //if any error occours trying save credential
@@ -148,5 +155,13 @@ class _LoginPageState extends State<LoginPage> {
 
   void _saveCredential(String name, String email) {
     widget.saveCredentialStore.saveCredential(name, email);
+  }
+
+  @override
+  void dispose() {
+    _disposers?.forEach((element) {
+      element();
+    });
+    super.dispose();
   }
 }
